@@ -1,0 +1,10 @@
+services:
+  ffc-sfd-queries:
+    build:
+      context: .
+      target: production
+    image: ffc-sfd-queries
+    container_name: ffc-sfd-queries
+    environment:
+      APPINSIGHTS_CLOUDROLE: ffc-sfd-queries-local
+      APPINSIGHTS_CONNECTIONSTRING: ${APPINSIGHTS_CONNECTIONSTRING}

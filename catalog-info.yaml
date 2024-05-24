@@ -1,0 +1,44 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ffc-sfd-queries
+  description: Single Front Door queries service.
+  annotations:
+    github.com/project-slug: defra/ffc-sfd-queries
+    dev.azure.com/project: DEFRA-FFC
+    dev.azure.com/build-definition: ffc-sfd-queries
+    sonarqube.org/project-key: ffc-sfd-queries
+    grafana/dashboard-selector: "folderTitle == 'Managed Prometheus'"
+    backstage.io/kubernetes-id: ffc-sfd-queries
+  links:
+    - url: https://github.com/defra/ffc-sfd-queries
+      title: GitHub Repository
+      icon: github
+    - url: https://dev.azure.com/defragovuk/DEFRA-FFC/
+      title: Azure DevOps Project
+      icon: project
+    - url: https://sonarcloud.io/project/overview?id=ffc-sfd-queries
+      title: SonarCloud Analysis
+      icon: check
+    - url: https://snyk.io/test/github/DEFRA/ffc-sfd-queries
+      title: Snyk Analysis
+      icon: policy
+    - url: https://portal.azure.com/defradev.onmicrosoft.com
+      title: Azure Portal - Defra Dev
+      icon: cloud
+    - url: https://portal.azure.com/Defra.onmicrosoft.com
+      title: Azure Portal - Defra
+      icon: cloud
+    - url: https://ffc-sfd-queries.snd3.adp.defra.gov.uk/
+      title: SND3
+    - url: https://ffc-sfd-queries.dev1.adp.defra.gov.uk/
+      title: DEV1
+    - url: https://ffc-sfd-queries.tst1.adp.defra.gov.uk/
+      title: TST1
+    - url: https://ffc-sfd-queries.pre1.adp.defra.gov.uk/
+      title: PRE1
+spec:
+  type: frontend
+  lifecycle: alpha
+  owner: "group:default/fcp-sfd"
+  system: system:default/fcp-sfd-system
