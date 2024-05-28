@@ -3,6 +3,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const routePrefix = process.env.ROUTE_PREFIX || '/queries'
+
 const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
 
 console.log(`Running webpack in ${isDev ? 'development' : 'production'} mode`)

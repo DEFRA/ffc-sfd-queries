@@ -18,7 +18,7 @@ container:
 
 # These may be changed. See here: https://github.com/DEFRA/adp-helm-library?tab=readme-ov-file#container-template
 livenessProbe:
-  path: /healthz
+  path: /queries/healthz
   port: 3017
   initialDelaySeconds: 20
   periodSeconds: 10
@@ -27,7 +27,7 @@ livenessProbe:
 
 # These may be changed. See here: https://github.com/DEFRA/adp-helm-library?tab=readme-ov-file#container-template
 readinessProbe:
-  path: /healthy
+  path: /queries/healthy
   port: 3017
   initialDelaySeconds: 30
   periodSeconds: 10
@@ -38,5 +38,7 @@ readinessProbe:
 # Your URL will be your <service-name>.<environment>.adp.defra.gov.uk for a front-end Web UI component. Azure Front Door is the Global Load Balancer, CDN and WAF. Nginx is the in-cluster ingress controller.
 ingress:
   class: nginx
-  endpoint: ffc-sfd-queries
-  server: environment.adp.defra.gov.uk
+  endpoint: ffc-sfd-landing-page
+  server: adp.defra.gov.uk
+  type: minion
+  path: /queries
