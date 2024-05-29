@@ -1,7 +1,7 @@
 const homeRoutes = require('../../../app/routes/home')
 const healthyRoutes = require('../../../app/routes/healthy')
 const healthzRoutes = require('../../../app/routes/healthz')
-const staticRoutes = require('../../../app/routes/static')
+const staticRoutes = require('../../../app/routes/asset')
 
 const router = require('../../../app/plugins/router')
 
