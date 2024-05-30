@@ -1,7 +1,7 @@
 # These are populated when your service is created via the ADP Portal scaffolder. Do not change these, as they are abstracted from your service and are mandatory. They are for your reference here.
 name: ffc-sfd-queries
-namespace: fcp-sfd
-workstream: fcp-sfd
+namespace: ffc-sfd
+workstream: ffc-sfd
 image: ffc-sfd-queries
 
 # You may add further labels to identify the service or what your component does.
