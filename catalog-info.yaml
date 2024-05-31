@@ -40,5 +40,5 @@ metadata:
 spec:
   type: frontend
   lifecycle: alpha
-  owner: "group:default/fcp-sfd"
+  owner: "group:default/ffc-sfd"
   system: system:default/fcp-sfd-system
