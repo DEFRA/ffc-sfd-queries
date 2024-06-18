@@ -2,7 +2,8 @@ const routes = [].concat(
   require('../routes/home'),
   require('../routes/healthy'),
   require('../routes/healthz'),
-  require('../routes/asset')
+  require('../routes/asset'),
+  require('../routes/open-query')
 )
 
 module.exports = {
