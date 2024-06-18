@@ -1,7 +1,6 @@
-const Wreck = require('@hapi/wreck')
 const { SFD_VIEW } = require('ffc-auth/scopes')
 const { GET, POST } = require('../constants/http-verbs')
-const { serverConfig } = require('../config')
+const { createQuery } = require('../data/create-query')
 
 module.exports = [{
   method: GET,
@@ -16,35 +15,7 @@ module.exports = [{
   path: '/open-query',
   options: { auth: { strategy: 'jwt', scope: [SFD_VIEW] } },
   handler: async (request, h) => {
-    const query = `mutation 
-    CreateQuery {
-      createQuery(
-          crn: "${request.auth.credentials.crn}"
-          sbi: "1"
-          heading: "${request.payload.queryTopic}"
-          body: "${request.payload.queryContent}"
-      ) {
-          code
-          success
-          message
-          customerQuery {
-              id
-              crn
-              sbi
-              heading
-              body
-          }
-      }
-  }`
-
-    const { payload } = await Wreck.post(serverConfig.dataHost, {
-      headers: {
-        crn: request.auth.credentials.crn,
-        'Content-Type': 'application/json'
-      },
-      payload: JSON.stringify({ query }),
-      json: true
-    })
+    const payload = await createQuery(request)
     if (payload.data.createQuery.code === 201) {
       return h.view('confirmation', { reference: payload.data.createQuery.customerQuery.id })
     } else {
