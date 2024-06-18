@@ -1,0 +1,56 @@
+{% extends '_layout.njk' %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-xl">{{organisation.name}}</span>
+      <h1 class="govuk-heading-xl">Your queries</h1>
+        <div class="govuk-grid-column-full">
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Reference</th>
+                <th scope="col" class="govuk-table__header">Subject</th>
+                <th scope="col" class="govuk-table__header">Last update</th>
+                <th scope="col" class="govuk-table__header">Read</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+
+              {% for query in queries %}
+
+              <tr class="govuk-table__row action"> 
+                <td class="govuk-table__cell">{{ query.id }}</td>
+                <td class="govuk-table__cell">{{ query.heading }}</td>
+                <td class="govuk-table__cell">18 June 2024 16:23</td>
+                <td class="govuk-table__cell">No</td>
+              </tr>
+
+
+              {% endfor %}
+
+            </tbody>
+          </table>
+          <nav class="govuk-pagination govuk-pagination--block" role="navigation" aria-label="Pagination" data-module="ga4-link-tracker" data-ga4-link-tracker-module-started="true">
+
+            <div class="govuk-pagination__next">
+              <a class="govuk-link--no-visited-state govuk-pagination__link" href="#" rel="next" data-track-category="contentsClicked" data-track-action="next" data-track-label="#" data-track-dimension="next" data-track-dimension-index="29" data-ga4-link="{&quot;event_name&quot;:&quot;navigation&quot;,&quot;type&quot;:&quot;previous and next&quot;,&quot;text&quot;:&quot;2 of 3&quot;,&quot;section&quot;:&quot;Next&quot;}">
+                <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                  <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                </svg>
+                  <span class="govuk-pagination__link-title">Next page</span>
+                  <span class="govuk-visually-hidden">:</span>
+                  <span class="govuk-pagination__link-label">1 of 2</span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
