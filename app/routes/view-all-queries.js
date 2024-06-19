@@ -1,5 +1,6 @@
 const { GET } = require('../constants/http-verbs')
 const { SFD_VIEW } = require('ffc-auth/scopes')
+const getOrganisation = require('../data/get-organisation')
 const { getQueries } = require('../data/get-queries')
 
 module.exports = {
@@ -7,7 +8,9 @@ module.exports = {
   path: '/view-all',
   options: { auth: { strategy: 'jwt', scope: [SFD_VIEW] } },
   handler: async (request, h) => {
-    const queries = await getQueries(request)
-    return h.view('view-all-queries', { queries })
+    const organisation = await getOrganisation(request)
+    const queries = await getQueries(organisation.sbi)
+    console.log({ queries, sbi: organisation.sbi })
+    return h.view('view-all-queries', { queries, sbi: organisation.sbi })
   }
 }

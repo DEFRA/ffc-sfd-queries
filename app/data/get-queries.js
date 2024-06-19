@@ -1,12 +1,10 @@
 const Wreck = require('@hapi/wreck')
 const { serverConfig } = require('../config')
-const getOrganisation = require('./get-organisation')
 
-const getQueries = async (request) => {
+const getQueries = async (sbi) => {
   try {
-    const organisation = await getOrganisation(request)
     const query = `query {
-    customerQueriesBySbi(sbi: "${organisation.sbi}") {
+    customerQueriesBySbi(sbi: "${sbi}") {
         sbi
         customerQueries {
             id
@@ -17,7 +15,6 @@ const getQueries = async (request) => {
         }
       }
   }`
-
     const { payload } = await Wreck.post(serverConfig.dataHost, {
       headers: {
         'Content-Type': 'application/json'
@@ -25,7 +22,6 @@ const getQueries = async (request) => {
       payload: JSON.stringify({ query }),
       json: true
     })
-
     return payload.data.customerQueriesBySbi.customerQueries
   } catch (error) {
     throw new Error(error.message)
