@@ -4,16 +4,21 @@ const { serverConfig } = require('../config')
 const getQueries = async (sbi) => {
   try {
     const query = `query {
-    customerQueriesBySbi(sbi: "${sbi}") {
-        sbi
-        customerQueries {
-            id
+      allCustomerQueryTickets {
+        customerQueriesByTicketId {
+            code
+            success
+            message
+            ticketId
+            _ts
             crn
             sbi
-            heading
-            body
+            customerQueryResponses {
+                heading
+                body
+            }
+          }
         }
-      }
   }`
     const { payload } = await Wreck.post(serverConfig.dataHost, {
       headers: {
@@ -22,7 +27,7 @@ const getQueries = async (sbi) => {
       payload: JSON.stringify({ query }),
       json: true
     })
-    return payload.data.customerQueriesBySbi.customerQueries
+    return payload.data.allCustomerQueryTickets.customerQueriesByTicketId.filter(query => query.sbi === sbi)
   } catch (error) {
     throw new Error(error.message)
   }

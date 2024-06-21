@@ -24,8 +24,8 @@
               {% for query in queries %}
 
               <tr class="govuk-table__row action"> 
-                <td class="govuk-table__cell">{{ query.id }}</td>
-                <td class="govuk-table__cell">{{ query.heading }}</td>
+                <td class="govuk-table__cell">{{ query.ticketId }}</td>
+                <td class="govuk-table__cell">{{ query.customerQueryResponses[0].body | truncate(15) }}</td>
                 <td class="govuk-table__cell">18 June 2024 16:23</td>
                 <td class="govuk-table__cell">No</td>
               </tr>

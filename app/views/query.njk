@@ -1,0 +1,54 @@
+ {# Backstage scaffolder to render the file as is and to skip this content to interpret as template   #}
+{% extends '_layout.njk' %}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-l">Ticket id: {{data.ticketId}}</span>
+      <h1 class="govuk-heading-l">{{data.heading}}</h1>
+
+      <form method="POST" action="/queries/query/{{data.ticketId}}" novalidate>
+        <div class="govuk-form-group">
+        <input type="hidden" name="crumb" value="{{crumb}}"/>
+          <h3 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--m" for="more-detail">
+              Type your reply
+            </label>
+          </h3>
+          <div id="more-detail-hint" class="govuk-hint">
+            Do not include personal or financial information, like your National Insurance number or credit card details.
+          </div>
+          <textarea class="govuk-textarea" id="query-content" name="queryContent" rows="5" aria-describedby="query-content-hint"></textarea>
+        </div>
+        {{ govukButton({
+            text: "Submit",
+            attributes: {
+              id: "open-query"
+            }
+          }) }}
+      </form>
+      
+    </div>
+  </div>
+  
+  {% for response in data.customerQueryResponses %}
+   <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">
+        <span class="govuk-!-font-weight-bold">User Name Here</span> <br>
+        {{response._ts}} <br>
+      </p>
+      <p class="govuk-body"><p class="govuk-body">
+        {{response.body}} <br>
+      </p>  
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}
+
