@@ -16,8 +16,8 @@ module.exports = [{
   options: { auth: { strategy: 'jwt', scope: [SFD_VIEW] } },
   handler: async (request, h) => {
     const payload = await createQuery(request)
-    if (payload.data.createCustomerQueryTicket.code === 201) { // no status code available yet
-      return h.view('confirmation', { reference: payload.data.createCustomerQueryTicket.ticketId })
+    if (payload.data.createCustomerQueryTicket.status.code === 201) {
+      return h.view('confirmation', { reference: payload.data.createCustomerQueryTicket.customerQueryTicket.id })
     } else {
       throw new Error(payload.message)
     }

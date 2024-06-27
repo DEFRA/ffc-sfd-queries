@@ -7,16 +7,16 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <span class="govuk-caption-xl">{{organisation.sbi}}</span>
+      <span class="govuk-caption-xl">{{organisation.name}}: {{organisation.sbi}}</span>
       <h1 class="govuk-heading-xl">Your queries</h1>
         <div class="govuk-grid-column-full">
           <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
                 <th scope="col" class="govuk-table__header">Reference</th>
-                <th scope="col" class="govuk-table__header">Subject</th>
-                <th scope="col" class="govuk-table__header">Last update</th>
-                <th scope="col" class="govuk-table__header">Read</th>
+                <th scope="col" class="govuk-table__header">Scheme</th>
+                <th scope="col" class="govuk-table__header">Summary</th>
+                <th scope="col" class="govuk-table__header">Opened</th>
               </tr>
             </thead>
             <tbody class="govuk-table__body">
@@ -24,10 +24,10 @@
               {% for query in queries %}
 
               <tr class="govuk-table__row action"> 
-                <td class="govuk-table__cell">{{ query.ticketId }}</td>
-                <td class="govuk-table__cell">{{ query.customerQueryResponses[0].body | truncate(15) }}</td>
-                <td class="govuk-table__cell">18 June 2024 16:23</td>
-                <td class="govuk-table__cell">No</td>
+                <td class="govuk-table__cell"> <a href="/queries/query/{{ query.id }}">{{ query.heading }}{{ organisation.sbi }}{{ query.id | truncate(4) }}</a> </td>
+                <td class="govuk-table__cell">{{ query.heading }}</td>
+                <td class="govuk-table__cell">{{ query.body | truncate(15) }}</td>
+                <td class="govuk-table__cell">{{query.timestamp}}</td>
               </tr>
 
 

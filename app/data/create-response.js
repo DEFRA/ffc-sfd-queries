@@ -1,9 +1,42 @@
 const Wreck = require('@hapi/wreck')
 const { serverConfig } = require('../config')
+const getOrganisation = require('./get-organisation')
 
 const createResponse = async (request) => {
   try {
-    const query = `mutation CreateCustomerQueryResponse {
+    const name = request.params.internalUser ? 'Internal User' : await getOrganisation(request).name
+    const query = `mutation UpdateCustomerQueryTicket {
+    updateCustomerQueryTicket(
+        id: "${request.params.id}"
+        internalUser: "${request.params.internalUser}"
+        name: "${name}"
+        heading: "${request.params.heading}"
+        body: "${request.params.body}"
+    ) {
+        status {
+            code
+            success
+            message
+        }
+        customerQueryTicket {
+            id
+            timestamp
+            internalUser
+            name
+            crn
+            sbi
+            heading
+            body
+            responses {
+                timestamp
+                internalUser
+                name
+                heading
+                body
+            }
+        }
+    }
+}``mutation CreateCustomerQueryResponse {
     createCustomerQueryResponse(
         ticketId: "${request.params.ticketId}"
         heading: "${request.payload.queryTopic}"

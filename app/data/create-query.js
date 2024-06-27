@@ -4,19 +4,37 @@ const getOrganisation = require('./get-organisation')
 
 const createQuery = async (request) => {
   const organisation = await getOrganisation(request)
+
   const query = `mutation CreateCustomerQueryTicket {
     createCustomerQueryTicket(
-          crn: "${request.auth.credentials.crn}"
-          sbi: "${organisation.sbi}"
-          heading: "${request.payload.queryTopic}"
-          body: "${request.payload.queryContent}") {
-        code
-        success
-        message
-        ticketId
-        _ts
-        crn
-        sbi
+        name: "${organisation.name}"
+        crn: "${request.auth.credentials.crn}"
+        sbi: "${organisation.sbi}"
+        heading: "${request.payload.queryTopic}"
+        body: "${request.payload.queryContent}"
+    ) {
+        status {
+            code
+            success
+            message
+        }
+        customerQueryTicket {
+            id
+            timestamp
+            internalUser
+            name
+            crn
+            sbi
+            heading
+            body
+            responses {
+                timestamp
+                internalUser
+                name
+                heading
+                body
+            }
+        }
     }
 }`
 

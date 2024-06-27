@@ -10,7 +10,6 @@ module.exports = {
   handler: async (request, h) => {
     const organisation = await getOrganisation(request)
     const queries = await getQueries(organisation.sbi)
-    console.log({ queries, sbi: organisation.sbi })
-    return h.view('view-all-queries', { queries, sbi: organisation.sbi })
+    return h.view('view-all-queries', { queries, organisation })
   }
 }
