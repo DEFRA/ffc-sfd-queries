@@ -4,14 +4,21 @@ const getOrganisation = require('./get-organisation')
 
 const createResponse = async (request) => {
   try {
-    const name = request.params.internalUser ? 'Internal User' : await getOrganisation(request).name
+    let name
+    if (request.payload.internalUser !== 'false') {
+      name = 'Internal User'
+    } else {
+      const organisation = await getOrganisation(request)
+      name = organisation.name
+    }
+
     const query = `mutation UpdateCustomerQueryTicket {
     updateCustomerQueryTicket(
-        id: "${request.params.id}"
-        internalUser: "${request.params.internalUser}"
+        id: "${request.params.ticketId}"
+        internalUser: ${request.payload.internalUser !== 'false'}
         name: "${name}"
-        heading: "${request.params.heading}"
-        body: "${request.params.body}"
+        heading: "${request.payload.heading}"
+        body: "${request.payload.queryContent}"
     ) {
         status {
             code
@@ -35,23 +42,6 @@ const createResponse = async (request) => {
                 body
             }
         }
-    }
-}``mutation CreateCustomerQueryResponse {
-    createCustomerQueryResponse(
-        ticketId: "${request.params.ticketId}"
-        heading: "${request.payload.queryTopic}"
-        body: "${request.payload.queryContent}")
-         {
-        code
-        success
-        message
-        id
-        ticketId
-        _ts
-        internalUser
-        name
-        heading
-        body
     }
 }`
     const { payload } = await Wreck.post(serverConfig.dataHost, {

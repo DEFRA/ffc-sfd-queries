@@ -4,24 +4,23 @@ const { serverConfig } = require('../config')
 const getTicket = async (ticketId) => {
   try {
     const query = `{
-      customerQueriesByTicketId(ticketId: "${ticketId}") {
-          ticketId
-          code
-          success
-          message
-          _ts
-          crn
-          sbi
-          customerQueryResponses {
-              id
-              ticketId
-              _ts
-              internalUser
-              name
-              heading
-              body
-          }
-      }
+      customerQueryTicketById(id: "${ticketId}") {
+        id
+        timestamp
+        internalUser
+        name
+        crn
+        sbi
+        heading
+        body
+        responses {
+            timestamp
+            internalUser
+            name
+            heading
+            body
+        }
+    }
   }`
     const { payload } = await Wreck.post(serverConfig.dataHost, {
       headers: {
@@ -30,7 +29,7 @@ const getTicket = async (ticketId) => {
       payload: JSON.stringify({ query }),
       json: true
     })
-    return payload.data.customerQueriesByTicketId
+    return payload.data.customerQueryTicketById
   } catch (error) {
     throw new Error(error.message)
   }
