@@ -20,20 +20,6 @@ const createQuery = async (request) => {
         }
         customerQueryTicket {
             id
-            timestamp
-            internalUser
-            name
-            crn
-            sbi
-            heading
-            body
-            responses {
-                timestamp
-                internalUser
-                name
-                heading
-                body
-            }
         }
     }
 }`
@@ -47,6 +33,8 @@ const createQuery = async (request) => {
     json: true
   })
 
-  return payload
+  return {
+    ...payload.data.createCustomerQueryTicket
+  }
 }
 module.exports = { createQuery }

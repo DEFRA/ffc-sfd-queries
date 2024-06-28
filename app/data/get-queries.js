@@ -8,10 +8,6 @@ const getQueries = async (sbi) => {
         customerQueryTickets {
             id
             timestamp
-            internalUser
-            name
-            crn
-            sbi
             heading
             body
       }

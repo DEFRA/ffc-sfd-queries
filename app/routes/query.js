@@ -17,8 +17,12 @@ module.exports = [{
   path: '/query/{ticketId}',
   options: { auth: { strategy: 'jwt', scope: [SFD_VIEW] } },
   handler: async (request, h) => {
-    await createResponse(request)
-    return h.redirect(`/queries/query/${request.params.ticketId}`)
+    const payload = await createResponse(request)
+    if (payload.code === 200) {
+      return h.redirect(`/queries/query/${request.params.ticketId}`)
+    } else {
+      throw new Error(payload.message)
+    }
   }
 
 }

@@ -4,19 +4,13 @@ const getOrganisation = require('./get-organisation')
 
 const createResponse = async (request) => {
   try {
-    let name
-    if (request.payload.internalUser !== 'false') {
-      name = 'Internal User'
-    } else {
-      const organisation = await getOrganisation(request)
-      name = organisation.name
-    }
+    const organisation = await getOrganisation(request)
 
     const query = `mutation UpdateCustomerQueryTicket {
     updateCustomerQueryTicket(
         id: "${request.params.ticketId}"
         internalUser: ${request.payload.internalUser !== 'false'}
-        name: "${name}"
+        name: "${organisation.name}"
         heading: "${request.payload.heading}"
         body: "${request.payload.queryContent}"
     ) {
@@ -24,23 +18,6 @@ const createResponse = async (request) => {
             code
             success
             message
-        }
-        customerQueryTicket {
-            id
-            timestamp
-            internalUser
-            name
-            crn
-            sbi
-            heading
-            body
-            responses {
-                timestamp
-                internalUser
-                name
-                heading
-                body
-            }
         }
     }
 }`
@@ -53,9 +30,9 @@ const createResponse = async (request) => {
       json: true
     })
 
-    return payload
+    return payload.data.updateCustomerQueryTicket.status
   } catch (error) {
-    console.log(error)
+    throw new Error(error.message)
   }
 }
 

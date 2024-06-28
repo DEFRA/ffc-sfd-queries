@@ -6,20 +6,15 @@ const getTicket = async (ticketId) => {
     const query = `{
       customerQueryTicketById(id: "${ticketId}") {
         id
-        timestamp
-        internalUser
-        name
-        crn
-        sbi
         heading
+        name
+        timestamp
         body
         responses {
-            timestamp
-            internalUser
-            name
-            heading
-            body
-        }
+          name
+          timestamp
+          body
+      }
     }
   }`
     const { payload } = await Wreck.post(serverConfig.dataHost, {

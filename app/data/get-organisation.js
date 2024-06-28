@@ -6,15 +6,7 @@ const getOrganisation = async (request) => {
   try {
     const query = `query {
             organisation(organisationId: ${request.auth.credentials.organisationId}) {
-              sbi
               name
-              mobile
-              email
-              address {
-                fullAddress
-              }
-              type
-              legalStatus
             }
           }`
 
