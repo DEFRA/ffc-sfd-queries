@@ -1,7 +1,7 @@
 const { GET } = require('../constants/http-verbs')
 const { SFD_VIEW } = require('ffc-auth/scopes')
-const getOrganisation = require('../data/get-organisation')
-const { getQueries } = require('../data/get-queries')
+const { getOrganisation } = require('../data')
+const { getQueries } = require('../data')
 
 module.exports = {
   method: GET,

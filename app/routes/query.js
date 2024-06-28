@@ -1,7 +1,7 @@
 const { SFD_VIEW } = require('ffc-auth/scopes')
 const { GET, POST } = require('../constants/http-verbs')
-const { createResponse } = require('../data/create-response')
-const { getTicket } = require('../data/get-ticket')
+const { createResponse } = require('../data')
+const { getTicket } = require('../data')
 
 module.exports = [{
   method: GET,
