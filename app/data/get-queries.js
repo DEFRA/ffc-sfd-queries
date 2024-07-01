@@ -20,7 +20,11 @@ const getQueries = async (sbi) => {
       payload: JSON.stringify({ query }),
       json: true
     })
-    return payload.data.customerQueryTicketsBySbi.customerQueryTickets
+
+    const queries = payload.data.customerQueryTicketsBySbi.customerQueryTickets
+    queries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+
+    return queries
   } catch (error) {
     throw new Error(error.message)
   }
