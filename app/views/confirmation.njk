@@ -1,0 +1,29 @@
+ {# Backstage scaffolder to render the file as is and to skip this content to interpret as template   #}
+{% extends '_layout.njk' %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-panel govuk-panel--confirmation">
+        <h1 class="govuk-panel__title">
+          Query submitted
+        </h1>
+        <div class="govuk-panel__body">
+          Your reference number<br><strong>{{reference}}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">
+        View <a href="/queries/view-all" class="govuk-link">all open queries</a>.
+      </p>
+    </div>
+  </div>
+
+
+{% endblock %}
+
