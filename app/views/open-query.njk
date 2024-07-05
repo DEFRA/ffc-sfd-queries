@@ -1,0 +1,65 @@
+ {# Backstage scaffolder to render the file as is and to skip this content to interpret as template   #}
+{% extends '_layout.njk' %}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form method="POST" action="/queries/open-query" novalidate>
+        <div class="govuk-form-group">
+        <input type="hidden" name="crumb" value="{{crumb}}"/>
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--l" for="more-detail">
+              Open a new query
+            </label>
+          </h1>
+          {{ govukRadios({
+            name: "queryTopic",
+            fieldset: {
+              legend: {
+                text: "What is your query about?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "SFI",
+                text: "Sustainable Farming Incentive"
+              },
+              {
+                value: "CS",
+                text: "Countryside Stewardship"
+              },
+              {
+                value: "AHWP",
+                text: "Animal Health and Welfare Pathway"
+              },
+              {
+                value: "Other",
+                text: "Other"
+              }
+            ]
+          }) }}
+          <div id="more-detail-hint" class="govuk-hint">
+            Do not include personal or financial information, like your National Insurance number or credit card details.
+          </div>
+          <textarea class="govuk-textarea" id="query-content" name="queryContent" rows="5" aria-describedby="query-content-hint"></textarea>
+        </div>
+        {{ govukButton({
+            text: "Submit",
+            attributes: {
+              id: "open-query"
+            }
+          }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
+
