@@ -1,6 +1,7 @@
 const path = require('path')
 const nunjucks = require('nunjucks')
 const pkg = require('../../package.json')
+const { serverConfig } = require('../config')
 
 module.exports = {
   plugin: require('@hapi/vision'),
@@ -35,8 +36,8 @@ module.exports = {
       appVersion: pkg.version,
       assetPath: '/static',
       govukAssetPath: '/assets',
-      serviceName: 'ffc-sfd-queries',
-      pageTitle: 'ffc-sfd-queries - GOV.UK'
+      serviceName: serverConfig.serviceName,
+      pageTitle: `${serverConfig.serviceName} - GOV.UK`
     }
   }
 }
