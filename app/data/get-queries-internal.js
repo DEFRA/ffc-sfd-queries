@@ -4,15 +4,16 @@ const { serverConfig } = require('../config')
 const getQueriesInternal = async () => {
   try {
     const query = `query {
-       allCustomerQueryTickets {
+      allCustomerQueryTickets {
         customerQueryTickets {
             id
             timestamp
             heading
             body
+        }
       }
-    }
-  }`
+    }`
+
     const { payload } = await Wreck.post(serverConfig.dataHost, {
       headers: {
         'Content-Type': 'application/json'

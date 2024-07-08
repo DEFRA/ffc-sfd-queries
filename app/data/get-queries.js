@@ -4,15 +4,15 @@ const { serverConfig } = require('../config')
 const getQueries = async (sbi) => {
   try {
     const query = `query {
-       customerQueryTicketsBySbi(sbi: "${sbi}") {
+      customerQueryTicketsBySbi(sbi: "${sbi}") {
         customerQueryTickets {
             id
             timestamp
             heading
             body
+        }  
       }
-    }
-  }`
+    }`
     const { payload } = await Wreck.post(serverConfig.dataHost, {
       headers: {
         'Content-Type': 'application/json'
