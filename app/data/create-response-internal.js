@@ -4,20 +4,21 @@ const { serverConfig } = require('../config')
 const createResponseInternal = async (request) => {
   try {
     const query = `mutation UpdateCustomerQueryTicket {
-    updateCustomerQueryTicket(
+      updateCustomerQueryTicket(
         id: "${request.params.ticketId}"
         internalUser: ${request.payload.internalUser !== 'true'}
         name: "Internal User"
         heading: "${request.payload.heading}"
         body: "${request.payload.queryContent}"
-    ) {
+      ) {
         status {
             code
             success
             message
         }
-    }
-}`
+      }
+    }`
+
     const { payload } = await Wreck.post(serverConfig.dataHost, {
       headers: {
         crn: request.auth.credentials.crn,
