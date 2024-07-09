@@ -6,8 +6,8 @@ const createResponseInternal = async (request) => {
     const query = `mutation UpdateCustomerQueryTicket {
       updateCustomerQueryTicket(
         id: "${request.params.ticketId}"
-        internalUser: ${request.payload.internalUser !== 'true'}
-        name: "Internal User"
+        internalUser: true
+        name: "INTERNAL USER"
         heading: "${request.payload.heading}"
         body: "${request.payload.queryContent}"
       ) {

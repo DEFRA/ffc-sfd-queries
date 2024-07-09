@@ -23,7 +23,7 @@
               {% for query in queries %}
 
               <tr class="govuk-table__row action"> 
-                <td class="govuk-table__cell"> <a href="/queries/query/{{ query.id }}">{{ query.id }}</a> </td>
+                <td class="govuk-table__cell"> <a href="/queries/internal/query/{{ query.id }}">{{ query.id }}</a> </td>
                 <td class="govuk-table__cell">{{ query.heading }}</td>
                 <td class="govuk-table__cell">{{ query.body | truncate(15) }}</td>
                 <td class="govuk-table__cell">{{ query.timestamp }}</td>
