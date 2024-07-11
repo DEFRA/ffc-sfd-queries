@@ -7,8 +7,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <span class="govuk-caption-xl">{{organisation.name}}: {{organisation.sbi}}</span>
-      <h1 class="govuk-heading-xl">Your queries</h1>
+      <h1 class="govuk-heading-xl">All customer queries</h1>
         <div class="govuk-grid-column-full">
           <table class="govuk-table">
             <thead class="govuk-table__head">
@@ -24,10 +23,10 @@
               {% for query in queries %}
 
               <tr class="govuk-table__row action"> 
-                <td class="govuk-table__cell"> <a href="/queries/query/{{ query.id }}">{{ query.id }}</a> </td>
+                <td class="govuk-table__cell"> <a href="/queries/internal/query/{{ query.id }}">{{ query.id }}</a> </td>
                 <td class="govuk-table__cell">{{ query.heading }}</td>
                 <td class="govuk-table__cell">{{ query.body | truncate(15) }}</td>
-                <td class="govuk-table__cell">{{query.timestamp}}</td>
+                <td class="govuk-table__cell">{{ query.timestamp }}</td>
               </tr>
 
 
