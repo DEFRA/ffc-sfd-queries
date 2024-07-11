@@ -1,8 +1,8 @@
-const { MessageSender } = require('ffc-messaging')
 const { SFD_VIEW } = require('ffc-auth/scopes')
 const { GET, POST } = require('../constants/http-verbs')
 const { createResponseInternal } = require('../data')
 const { getTicket } = require('../data')
+const { sender } = require('../config')
 
 module.exports = [{
   method: GET,
@@ -18,14 +18,6 @@ module.exports = [{
   path: '/internal/query/{ticketId}',
   options: { auth: { strategy: 'jwt', scope: [SFD_VIEW] } },
   handler: async (request, h) => {
-    const sender = new MessageSender({
-      useCredentialChain: false,
-      host: process.env.MESSAGE_HOST,
-      username: process.env.MESSAGE_USER,
-      password: process.env.MESSAGE_PASSWORD,
-      address: process.env.QUERIES_TOPIC_ADDRESS
-    })
-
     await sender.sendMessage({
       body: {
         id: request.params.ticketId,
