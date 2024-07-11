@@ -8,7 +8,7 @@ const createResponseInternal = async (request) => {
         id: "${request.params.ticketId}"
         internalUser: true
         name: "INTERNAL USER"
-        heading: "${request.payload.heading}"
+        heading: "You have a new response to your query"
         body: "${request.payload.queryContent}"
       ) {
         status {

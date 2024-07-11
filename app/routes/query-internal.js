@@ -1,3 +1,4 @@
+const { MessageSender } = require('ffc-messaging')
 const { SFD_VIEW } = require('ffc-auth/scopes')
 const { GET, POST } = require('../constants/http-verbs')
 const { createResponseInternal } = require('../data')
@@ -17,6 +18,30 @@ module.exports = [{
   path: '/internal/query/{ticketId}',
   options: { auth: { strategy: 'jwt', scope: [SFD_VIEW] } },
   handler: async (request, h) => {
+    const sender = new MessageSender({
+      useCredentialChain: false,
+      host: process.env.MESSAGE_HOST,
+      username: process.env.MESSAGE_USER,
+      password: process.env.MESSAGE_PASSWORD,
+      address: process.env.QUERIES_TOPIC_ADDRESS
+    })
+
+    await sender.sendMessage({
+      body: {
+        id: request.params.ticketId,
+        internalUser: true,
+        name: 'INTERNAL USER',
+        responses: [
+          {
+            heading: request.payload.heading,
+            body: request.payload.queryContent
+          }
+        ]
+      },
+      type: 'query-internal',
+      source: 'ffc-sfd-queries'
+    })
+
     const payload = await createResponseInternal(request)
     if (payload.code === 200) {
       return h.redirect(`/queries/internal/query/${request.params.ticketId}`)
