@@ -29,11 +29,11 @@ module.exports = [{
     await sender.sendMessage({
       body: {
         id: request.params.ticketId,
-        internalUser: true,
-        name: 'INTERNAL USER',
         responses: [
           {
-            heading: request.payload.heading,
+            internalUser: true,
+            name: 'INTERNAL USER',
+            heading: 'You have a new response to your query',
             body: request.payload.queryContent
           }
         ]
@@ -49,6 +49,4 @@ module.exports = [{
       throw new Error(payload.message)
     }
   }
-
-}
-]
+}]
