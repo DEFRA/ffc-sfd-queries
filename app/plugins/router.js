@@ -5,7 +5,9 @@ const routes = [].concat(
   require('../routes/asset'),
   require('../routes/open-query'),
   require('../routes/view-all-queries'),
-  require('../routes/query')
+  require('../routes/view-all-queries-internal'),
+  require('../routes/query'),
+  require('../routes/query-internal')
 )
 
 module.exports = {
