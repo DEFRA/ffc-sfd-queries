@@ -3,3 +3,16 @@
   type: "keyvault"
 - key: GATEWAY_HOST
   value: "https://ffc-sfd.snd4.adp.defra.gov.uk"
+- key: MESSAGE_HOST
+  value: "{{servicename}}-MESSAGE-HOST"
+  type: "keyvault"
+- key: MESSAGE_USER
+  value: "{{servicename}}-MESSAGE-USER"
+  type: "keyvault"
+- key: MESSAGE_PASSWORD
+  value: "{{servicename}}-MESSAGE-PASSWORD"
+  type: "keyvault"
+- key: QUERIES_TOPIC_ADDRESS
+  value: "fcp-sfd-customer-queries"
+- key: QUERIES_SUBSCRIPTION_ADDRESS
+  value: "fcp-sfd-customer-receiver-queries"
